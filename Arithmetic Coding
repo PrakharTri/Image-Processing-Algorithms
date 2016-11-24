@@ -1,0 +1,85 @@
+package arithmeticcoding;
+
+/*
+-----author-----
+Prakhar 
+131333
+*/
+
+import java.io.*;
+import java.util.*;
+
+public class ArithmeticCoding {
+
+    /**
+     * @param args the command line arguments
+     */
+    static Map<Character,Integer> hmap=new HashMap<Character,Integer>();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+        String s=br.readLine();
+        char[] ch=s.toCharArray();
+        for(char ch0:ch)
+            hmap.put(ch0,0);
+        Set<Character> tset=new TreeSet<Character>();
+        for(char ch0:ch)
+        {
+            tset.add(ch0);
+            hmap.put(ch0,hmap.get(ch0)+1);
+        }
+        for(char ch0:hmap.keySet())
+        {
+            System.out.println((float)(hmap.get(ch0))/(float)(ch.length));
+        }
+        List<Character> lc=new ArrayList<Character>();
+        lc.addAll(tset);
+        List<Float> lp=new ArrayList<Float>();
+        for(char ch0:tset)
+            lp.add(prob(ch0,ch.length));
+//        lp.add(1f);
+//        System.out.println("-----\n"+lp);
+        float x=0f;
+        List<Float> lp0=new ArrayList<Float>();
+        lp0.add(x);
+        lp0.addAll(lp);
+        for(int i=0;i<lp0.size();++i)
+        {
+            lp0.set(i,lp0.get(i)+x);
+            x=lp0.get(i);
+        }
+//        lp0.add(1f);
+        System.out.println("-----\n"+lp0);
+        float l=0f,u=0f;
+        for(char ch0:ch)
+        {
+            int xx=lc.indexOf(ch0);
+            l=lp0.get(xx);
+            u=lp0.get(xx+1); 
+            System.out.println("****"+ch0+"````"+l+"  "+u+"  -->"+prob(ch0,ch.length));
+            for(int i=0;i<lp.size();++i)
+            {
+                lp.set(i,lp.get(i)*prob(ch0,ch.length));
+            }
+            //System.out.println("-----LP\n"+lp);
+            x=l;
+            lp0.clear();
+            lp0.add(x);
+        lp0.addAll(lp);
+        for(int i=1;i<lp0.size();++i)
+        {
+            lp0.set(i,lp0.get(i)+x);
+            x=lp0.get(i);
+        }
+//        lp0.add(u);
+        System.out.println("-----\n"+lp0);
+        }
+        System.out.println("\n\n\n\n\\n\n\\n");
+        System.out.println((float)(l+u)/2);
+        
+    }
+    
+    static float prob(char c,int len)
+    {
+        return ((float)(hmap.get(c))/(float)(len));
+    }
+}
