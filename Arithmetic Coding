@@ -1,5 +1,4 @@
 package arithmeticcoding;
-
 /*
 -----author-----
 Prakhar 
@@ -11,15 +10,13 @@ import java.util.*;
 
 public class ArithmeticCoding {
 
-    /**
-     * @param args the command line arguments
-     */
     static Map<Character,Integer> hmap=new HashMap<Character,Integer>();
     public static void main(String[] args) throws IOException {
         BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
         String s=br.readLine();
         char[] ch=s.toCharArray();
-        for(char ch0:ch)
+
+for(char ch0:ch)
             hmap.put(ch0,0);
         Set<Character> tset=new TreeSet<Character>();
         for(char ch0:ch)
