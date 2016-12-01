@@ -26,11 +26,11 @@ public class Hoffmann_nonBinary {
         Map<Character, String> testcodemap=new TreeMap<Character,String>();
         System.out.println("Enter the word or write no. of characters for providing userdefined probablity");
         String s=br.readLine();
-            int totlen,initlen=0,flen=0;
+            int totlen;
+            float initlen=0,flen=0;
         try{
             int x=Integer.parseInt(s);
             totlen=x;
-            initlen=x*3;
             System.out.println("Enter the Character followed by its probability in the next line");
             for(int i=0;i<x;++i)
             {
@@ -62,6 +62,7 @@ public class Hoffmann_nonBinary {
             testset.add(tmap0.get(ch0)+" "+ch0);                // appending character after its probability in treeset
         }
         }
+        initlen=totlen*3;
         long startTime0 = System.nanoTime();
         long startTime = System.currentTimeMillis();
         for(String st:testset)
@@ -289,6 +290,7 @@ public class Hoffmann_nonBinary {
         }
             float avlen=0f;
         NumberFormat df=new DecimalFormat("#.####");
+        NumberFormat df0=new DecimalFormat("#.##");
         for(char ch0: testcodemap.keySet())
             avlen+=tmap0.get(ch0)*1f*testcodemap.get(ch0).length();             //prob * code length
             flen=avlen*totlen;
@@ -297,7 +299,7 @@ public class Hoffmann_nonBinary {
             eff+=(1D*tmap0.get(ch0)*Math.log(tmap0.get(ch0)))/(1D*Math.log(2)*totlen);
         eff/=1D*avlen;
         System.out.println("Average Code Length = "+df.format(avlen)+"\nEfficiency of Compression = "+df.format(Math.abs(eff)));
-            System.out.println("Compression % = "+((initlen*1D)/(1D*flen))*100+"%");
+            System.out.println("Compression Percentage = "+df0.format(((initlen*1D)/(1D*flen)))*100+"%");
         
         long elapsedTime = stopTime - startTime;
         long elapsedTime0 = stopTime0 - startTime0;
