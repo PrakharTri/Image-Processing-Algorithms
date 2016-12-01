@@ -154,6 +154,7 @@ public class Hoffmann_binary {
         
         float avlen=0f;
          NumberFormat df=new DecimalFormat("#.####");
+     NumberFormat df0=new DecimalFormat("#.####");
         for(char ch0: testcodemap.keySet())
             avlen+=tmap0.get(ch0)*1f*testcodemap.get(ch0).length();             //prob * code length
         flen=avlen*totlen;
