@@ -1,4 +1,4 @@
-package hoffmann_binary;
+ float initlen=0,flen=0;package hoffmann_binary;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -27,6 +27,7 @@ public class Hoffmann_binary {
         System.out.println("Enter the word or write no. of characters for providing userdefined probablity");
         String s=br.readLine();
         int totlen;
+        float initlen=0,flen=0;
         try{
             int x=Integer.parseInt(s);
             totlen=x;
@@ -61,7 +62,7 @@ public class Hoffmann_binary {
         }
         }
         long startTime0 = System.nanoTime();
-        
+        initlen=totlen*2;
         for(String st:testset)
         {   
         testlist.add(st);                                       //copying values of treeset into an arraylist
@@ -155,11 +156,13 @@ public class Hoffmann_binary {
          NumberFormat df=new DecimalFormat("#.####");
         for(char ch0: testcodemap.keySet())
             avlen+=tmap0.get(ch0)*1f*testcodemap.get(ch0).length();             //prob * code length
+        flen=avlen*totlen;
         double eff=0;
         for(char ch0: testcodemap.keySet())
             eff+=(1D*tmap0.get(ch0)*Math.log(tmap0.get(ch0)))/(1D*Math.log(2)*totlen);
         eff/=1D*avlen;
         System.out.println("Average Code Length = "+df.format(avlen)+"\nEfficiency of Compression = "+df.format(Math.abs(eff)));
+        System.out.println("Compression Percentage = "+df0.format(((initlen*1D)/(1D*flen)))*100+"%");
         
         long elapsedTime0 = stopTime0 - startTime0;
         System.out.println("Compression TIME="+elapsedTime0+"ns");         //Elapsed Time in ns
