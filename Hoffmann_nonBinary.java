@@ -3,6 +3,8 @@ package hoffmann_non.binary;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -35,7 +37,8 @@ public class Hoffmann_nonBinary {
                 tmap.put(sch,sf);                       //probability of each character in the word
                 testset.add(sf+" "+sch);                // appending character after its probability in treeset
                 testcodemap.put(sch,"");                // mapping empty string to each character ------ -
-                
+                for(char ch0 : tmap.keySet())
+                    tmap0.put(ch0,tmap.get(ch0));    
             }
         }
         catch(Exception e){
@@ -215,6 +218,7 @@ public class Hoffmann_nonBinary {
                 count=0;
                 for(char c:s0.toCharArray())
                 {
+
                     if(c=='2'||c=='1'||c=='0')
                     {
                         sb.append("1"+c);
@@ -278,6 +282,16 @@ public class Hoffmann_nonBinary {
         {
             System.out.println(ch0+" => "+testcodemap.get(ch0));
         }
+            float avlen=0f;
+        NumberFormat df=new DecimalFormat("#.####");
+        for(char ch0: testcodemap.keySet())
+            avlen+=tmap0.get(ch0)*1f*testcodemap.get(ch0).length();             //prob * code length
+        double eff=0;
+        for(char ch0: testcodemap.keySet())
+            eff+=(1D*tmap0.get(ch0)*Math.log(tmap0.get(ch0)))/(1D*Math.log(2)*totlen);
+        eff/=1D*avlen;
+        System.out.println("Average Code Length = "+df.format(avlen)+"\nEfficiency of Compression = "+df.format(Math.abs(eff)));
+        
         long elapsedTime = stopTime - startTime;
         long elapsedTime0 = stopTime0 - startTime0;
 //        System.out.println("Compression TIME="+elapsedTime+"ms");       //Elapsed Time in ms
