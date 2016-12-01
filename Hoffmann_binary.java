@@ -26,8 +26,10 @@ public class Hoffmann_binary {
         Map<Character, String> testcodemap=new TreeMap<Character,String>();
         System.out.println("Enter the word or write no. of characters for providing userdefined probablity");
         String s=br.readLine();
+        int totlen;
         try{
             int x=Integer.parseInt(s);
+            totlen=x;
             System.out.println("Enter the Character followed by its probability in the next line");
             for(int i=0;i<x;++i)
             {
@@ -43,6 +45,7 @@ public class Hoffmann_binary {
         }
         catch(Exception e){
         char[] ch=s.toCharArray();
+            totlen=ch.length;
         Arrays.sort(ch);
         for(char ch0:ch)
         tmap.put(ch0,0f);          //initializing no. of each character as 0
@@ -57,6 +60,7 @@ public class Hoffmann_binary {
             testset.add(tmap0.get(ch0)+" "+ch0);                // appending character after its probability in treeset
         }
         }
+        long startTime0 = System.nanoTime();
         
         for(String st:testset)
         {   
@@ -141,10 +145,24 @@ public class Hoffmann_binary {
         System.out.println(testcodemap.values());
         System.out.println("****");
         System.out.println("Hoffmann Binary codes for different characters :");
+        long stopTime0=System.nanoTime();
         for(char ch0:testcodemap.keySet())
         {
             System.out.println(ch0+" => "+testcodemap.get(ch0));
         }
+        
+        float avlen=0f;
+         NumberFormat df=new DecimalFormat("#.####");
+        for(char ch0: testcodemap.keySet())
+            avlen+=tmap0.get(ch0)*1f*testcodemap.get(ch0).length();             //prob * code length
+        double eff=0;
+        for(char ch0: testcodemap.keySet())
+            eff+=(1D*tmap0.get(ch0)*Math.log(tmap0.get(ch0)))/(1D*Math.log(2)*totlen);
+        eff/=1D*avlen;
+        System.out.println("Average Code Length = "+df.format(avlen)+"\nEfficiency of Compression = "+df.format(Math.abs(eff)));
+        
+        long elapsedTime0 = stopTime0 - startTime0;
+        System.out.println("Compression TIME="+elapsedTime0+"ns");         //Elapsed Time in ns
         
     }
     
