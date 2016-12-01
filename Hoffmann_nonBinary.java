@@ -25,8 +25,10 @@ public class Hoffmann_nonBinary {
         Map<Character, String> testcodemap=new TreeMap<Character,String>();
         System.out.println("Enter the word or write no. of characters for providing userdefined probablity");
         String s=br.readLine();
+            int totlen;
         try{
             int x=Integer.parseInt(s);
+            totlen=x;
             System.out.println("Enter the Character followed by its probability in the next line");
             for(int i=0;i<x;++i)
             {
@@ -43,6 +45,7 @@ public class Hoffmann_nonBinary {
         }
         catch(Exception e){
         char[] ch=s.toCharArray();
+            totlen=ch.length;
         Arrays.sort(ch);
         for(char ch0:ch)
         tmap.put(ch0,0f);          //initializing no. of each character as 0
