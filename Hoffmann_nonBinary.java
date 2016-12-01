@@ -1,3 +1,4 @@
+
 package hoffmann_non.binary;
 
 import java.io.BufferedReader;
@@ -25,10 +26,11 @@ public class Hoffmann_nonBinary {
         Map<Character, String> testcodemap=new TreeMap<Character,String>();
         System.out.println("Enter the word or write no. of characters for providing userdefined probablity");
         String s=br.readLine();
-            int totlen;
+            int totlen,initlen=0,flen=0;
         try{
             int x=Integer.parseInt(s);
             totlen=x;
+            initlen=x*3;
             System.out.println("Enter the Character followed by its probability in the next line");
             for(int i=0;i<x;++i)
             {
@@ -289,11 +291,13 @@ public class Hoffmann_nonBinary {
         NumberFormat df=new DecimalFormat("#.####");
         for(char ch0: testcodemap.keySet())
             avlen+=tmap0.get(ch0)*1f*testcodemap.get(ch0).length();             //prob * code length
+            flen=avlen*totlen;
         double eff=0;
         for(char ch0: testcodemap.keySet())
             eff+=(1D*tmap0.get(ch0)*Math.log(tmap0.get(ch0)))/(1D*Math.log(2)*totlen);
         eff/=1D*avlen;
         System.out.println("Average Code Length = "+df.format(avlen)+"\nEfficiency of Compression = "+df.format(Math.abs(eff)));
+            System.out.println("Compression % = "+((initlen*1D)/(1D*flen))*100+"%");
         
         long elapsedTime = stopTime - startTime;
         long elapsedTime0 = stopTime0 - startTime0;
