@@ -299,7 +299,7 @@ public class Hoffmann_nonBinary {
             eff+=(1D*tmap0.get(ch0)*Math.log(tmap0.get(ch0)))/(1D*Math.log(2)*totlen);
         eff/=1D*avlen;
         System.out.println("Average Code Length = "+df.format(avlen)+"\nEfficiency of Compression = "+df.format(Math.abs(eff)));
-            System.out.println("Compression Percentage = "+df0.format(((initlen*1D)/(1D*flen)))*100+"%");
+            System.out.println("Compression Percentage = "+df0.format(((initlen*1D)/(1D*flen))*100)+"%");
         
         long elapsedTime = stopTime - startTime;
         long elapsedTime0 = stopTime0 - startTime0;
